@@ -27,7 +27,7 @@ class TaskController extends Controller
     {
         try {
             $query = Task::where('user_id', Auth::id());
-            
+
             $filter = new TaskFilter(request());
             $query = $filter->apply($query);
 
@@ -38,37 +38,6 @@ class TaskController extends Controller
 
             return response()->json(['error' => 'Could not get tasks'], 500);
         }
-        // try {
-        //     // Start with a base query for the authenticated user
-        //     $query = Task::where('user_id', Auth::id());
-            
-        //     // Apply name filter if provided
-        //     if ($name = request()->query('name')) {
-        //         $query->orWhere('name', 'like', '%' . $name . '%');
-        //     }
-            
-        //     // Apply description filter if provided
-        //     if ($description = request()->query('description')) {
-        //         $query->orWhere('description', 'like', '%' . $description . '%');
-        //     }
-            
-        //     // Apply completion date filter if provided
-        //     if ($completedAt = request()->query('completed_at')) {
-        //         // For exact date matching
-        //         $query->orWhereDate('completed_at', $completedAt);
-                
-
-        //     }
-                        
-        //     // Execute the query and return the results
-        //     $tasks = $query->get();
-            
-        //     return TaskResource::collection($tasks);
-            
-        // } catch (QueryException $e) {   
-        //     Log::error('Could not get tasks: ' . $e->getMessage());
-        //     return response()->json(['error' => 'Could not get tasks'], 500);
-        // }
     }
 
     /**
